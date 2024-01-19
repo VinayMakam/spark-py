@@ -1,0 +1,32 @@
+apiVersion: "sparkoperator.k8s.io/v1beta2"
+kind: SparkApplication
+metadata:
+  name: pyspark-example-03
+  namespace: spark-operator
+spec:
+    type: Python
+    pythonVersion: "3"
+    mode: cluster
+    image: "vinaymakam/pyspark-example-03:0.0.1"
+    imagePullPolicy: Always
+    mainApplicationFile: local:///app/pyspark_example_03.py
+    sparkVersion: "3.3.4"
+    restartPolicy:
+        type: OnFailure
+        onFailureRetries: 3
+        onFailureRetryInterval: 10
+        onSubmissionFailureRetries: 5
+        onSubmissionFailureRetryInterval: 20
+    driver:
+        cores: 1
+        coreLimit: "1200m"
+        memory: "512m"
+        labels:
+            version: 3.3.4
+        serviceAccount: my-release-spark
+    executor:
+        cores: 1
+        instances: 1
+        memory: "512m"
+        labels:
+            version: 3.3.4

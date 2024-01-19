@@ -1,5 +1,5 @@
 # Use a lightweight base image
-FROM vinaymakam/spark-py:3.4.2
+FROM vinaymakam/spark-py:3.3.4
 
 USER root
 
@@ -9,7 +9,7 @@ RUN mkdir /app
 WORKDIR /app
 
 # Copy the PySpark application code
-COPY example_pyspark_app.py /app/
+COPY pyspark_example_01.py /app/
 
 # Command to run the PySpark application
-CMD ["python", "/app/example_pyspark_app.py"]  
+CMD ["python", "/app/pyspark_example_01.py"]  
